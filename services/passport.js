@@ -5,6 +5,16 @@ const keys = require('../config/keys'); // ga usah pake .js extension
 
 const User = mongoose.model('users');
 
+passport.serializeUser((user, done) => {
+	done(null, user.id); //ini user.id buat cookie, mau ngambil dari mongodb
+});
+
+passport.deserializeUser((id, done) => {
+	User.findById(id).then(user => {
+		done(null, user);
+	});
+});
+
 passport.use(
 	new GoogleStrategy(
 		{
@@ -17,9 +27,13 @@ passport.use(
 			User.findOne({ googleId: profile.id }).then(existingUser => {
 				if (existingUser) {
 					//record sudah ada di database; untuk profileID tersebut
+					done(null, existingUser);
 				} else {
 					//record belum ada; buat record baru di database
-					new User({ googleId: profile.id }).save(); // dari google ID
+					// dari google ID
+					new User({ googleId: profile.id })
+						.save()
+						.then(user => done(null, user));
 				}
 			});
 		}
