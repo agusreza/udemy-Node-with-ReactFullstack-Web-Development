@@ -20,7 +20,8 @@ passport.use(
 		{
 			clientID: keys.googleClientID,
 			clientSecret: keys.googleClientSecret,
-			callbackURL: '/auth/google/callback'
+			callbackURL: '/auth/google/callback',
+			proxy: true
 			// callbackURL: 'http://www.lalareza.com'
 		},
 		(accessToken, refreshToken, profile, done) => {
