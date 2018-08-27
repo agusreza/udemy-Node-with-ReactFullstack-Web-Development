@@ -1,5 +1,5 @@
 // keys.js
-if (process.env.NODE_ENV == 'production') {
+if (process.env.NODE_ENV === 'production') {
 	// berarti ini di production
 	module.exports = require('./prod');
 } else {
