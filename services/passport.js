@@ -21,7 +21,6 @@ passport.use(
 			clientID: keys.googleClientID,
 			clientSecret: keys.googleClientSecret,
 			callbackURL: '/auth/google/callback',
-			passReqToCallback: true,
 			proxy: true
 			// callbackURL: 'http://www.lalareza.com'
 		},
